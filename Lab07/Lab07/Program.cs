@@ -1,41 +1,49 @@
 ﻿using System;
-using System.Collections;
 
-namespace HashTableDemo
+namespace ConsoleAppArray
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Hashtable weeks = new Hashtable();
-            weeks.Add("1", "Sunday");
-            weeks.Add("2", "Monday");
-            weeks.Add("3", "Tuesday");
-            weeks.Add("4", "Wednesday");
-            weeks.Add("5", "Thursday");
-            weeks.Add("6", "Friday");
-            weeks.Add("7", "Saturday");
+            int[] ArrayA = new int[] { 1, 2, 3, 4, 5, 6 };
+            int[] ArrayB = new int[6];
+            // copy by operator =
+            ArrayB = ArrayA;
 
-            Console.WriteLine("---- elements in Hashtable weeks ----");
-            foreach (DictionaryEntry day in weeks)
+            Console.WriteLine("*** Array copy by operator = ***");
+            Console.WriteLine("===== Before =====");
+            for (int i = 0; i < ArrayA.Length; i++)
             {
-                Console.WriteLine(day.Key + "   -   " + day.Value);
+                Console.WriteLine("arrayA[{0}] = {1}, ArrayB[{ 0}] = { 2} ",i, ArrayA[i], ArrayB[i]);
+            }
+            // change element 0 of ArrayA
+            ArrayA[0] = 9;
+            Console.WriteLine("===== After ======");
+            for (int i = 0; i < ArrayA.Length; i++)
+            {
+                Console.WriteLine("ArrayA[{0}] = {1},  ArrayB[{ 0}] = { 2}", i, ArrayA[i], ArrayB[i]);
             }
 
-            Console.WriteLine("\n---- weeks.Remove(\"4\"); ----");
-            weeks.Remove("4");
-            foreach (DictionaryEntry day in weeks)
+            // copy by method Array.Copy()
+            int[] ArrayC = new int[6];
+            Array.Copy(ArrayA, ArrayC, ArrayA.Length);
+
+            Console.WriteLine("*** Array copy by method Array.Copy() ***");
+            Console.WriteLine("===== Before =====");
+            for (int i = 0; i < ArrayA.Length; i++)
             {
-                Console.WriteLine(day.Key + "   -   " + day.Value);
+                Console.WriteLine("ArrayA[{0}] = {1}, ArrayC[{ 0}] = { 2}", i, ArrayA[i], ArrayC[i]);
+            }
+            // change element 0 of ArrayA
+            ArrayA[0] = 1;
+            Console.WriteLine("===== After =====");
+            for (int i = 0; i < ArrayA.Length; i++)
+            {
+                Console.WriteLine("ArrayA[{0}] = {1}, ArrayC[{ 0}] = { 2}", i, ArrayA[i], ArrayC[i]);
             }
 
-            Console.WriteLine("\n---- weeks.Clear(); ----");
-            weeks.Clear();
-            foreach (DictionaryEntry day in weeks)
-            {
-                Console.WriteLine(day.Key + "   -   " + day.Value);
-            }
-
+            // wait
             Console.ReadLine();
         }
     }
