@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace ConsoleAppArray
 {
@@ -6,35 +7,45 @@ namespace ConsoleAppArray
     {
         static void Main(string[] args)
         {
-            string[] array1 = { "cat", "dog", "carrot", "bird" };
+            // Array of characters.
+            char[] array1 = { 'q', 'w', 'e', 'r', 't',
+                'y', 'u', 'i', 'o', 'p' };
+            Array.Sort(array1);
 
-            //
-            // ค้นหาสมาชิกตัวแรกที่มีค่าตามกำหนด 
-            //
-            string value1 = Array.Find(array1,
-              element => element.StartsWith("car",
-              StringComparison.Ordinal));
+            // Array of strings.
+            string[] colors = new string[] { "red",
+              "orange", "blue", "green", "yellow", "lemon", "aqua"  };
+            Array.Sort(colors);
 
-            string value2 = Array.Find(array1,
-              element => element.StartsWith("fish",
-              StringComparison.Ordinal));
+            string[] AseanCountries = new string[] { "Cambodia", "Malaysia",
+              "Indonesia", "Singapore", "Thailand", "Philippines",
+              "Vietnam", "Brunei Darussalam", "Laos", "Myanmar" };
 
-            //
-            // ค้นหาสมาชิกตัวแรกที่มีความยาว string ตามกำหนด
-            //
-            string value3 = Array.Find(array1,
-                element => element.Length == 3);
+            // C# program that uses LINQ
+            var sortAscending = from country in AseanCountries
+                                orderby country
+                                select country;
+            var sortDescending = from country in AseanCountries
+                                 orderby country descending
+                                 select country;
 
-            //
-            // ค้นหา string ที่มีความยาวไม่เกินค่าที่กำหนด
-            //
-            string[] array2 = Array.FindAll(array1,
-                element => element.Length <= 4);
+            // print output
+            Console.WriteLine("------Character sorting----------");
+            foreach (var c in array1)
+                Console.WriteLine(c);
 
-            Console.WriteLine(value1);
-            Console.WriteLine(value2);
-            Console.WriteLine(value3);
-            Console.WriteLine(string.Join(",", array2));
+            Console.WriteLine("------String sorting----------");
+            foreach (string color in colors)
+                Console.WriteLine(color);
+
+            Console.WriteLine("------String sort ascending----------");
+            foreach (string c in sortAscending)
+                Console.WriteLine(c);
+
+            Console.WriteLine("------String sort descending----------");
+            foreach (string c in sortDescending)
+                Console.WriteLine(c);
+            // wait
             Console.ReadLine();
         }
     }
